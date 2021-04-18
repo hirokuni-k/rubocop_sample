@@ -1,9 +1,10 @@
 # 自動生成されるものはチェック対象から除外する
 AllCops:
   Exclude:
-    - "node_modules/**/*" # rubocop config/default.yml
-    - "vendor/**/*"       # rubocop config/default.yml
-    - "db/schema.rb"
+    - 'node_modules/**/*' # rubocop config/default.yml
+    - 'vendor/**/*' # rubocop config/default.yml
+    - 'db/schema.rb'
+    - 'bin/bundle'
 
 #################### Layout ################################
 
@@ -24,7 +25,7 @@ Layout/DotPosition:
 # 桁揃えが綺麗にならないことが多いので migration は除外
 Layout/ExtraSpacing:
   Exclude:
-    - "db/migrate/*.rb"
+    - 'db/migrate/*.rb'
 
 # special_inside_parentheses (default) と比べて
 # * 横に長くなりづらい
@@ -47,7 +48,7 @@ Layout/IndentationConsistency:
 Layout/LineLength:
   Max: 160
   Exclude:
-    - "db/migrate/*.rb"
+    - 'db/migrate/*.rb'
 
 # メソッドチェーン感がより感じられるインデントにする
 Layout/MultilineMethodCallIndentation:
@@ -67,7 +68,7 @@ Layout/SpaceInsideBlockBraces:
 # { foo } は明らかに change に紐付く。
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - "spec/**/*_spec.rb"
+    - 'spec/**/*_spec.rb'
 
 # Style/EmptyCaseCondition と同じく網羅の表現力が empty when を認めた方が高いし、
 # 頻出する対象を最初の when で撥ねるのはパフォーマンス向上で頻出する。
@@ -120,15 +121,15 @@ Metrics/AbcSize:
 # TODO: ExcludedMethods の精査
 Metrics/BlockLength:
   Exclude:
-    - "Rakefile"
-    - "**/*.rake"
-    - "spec/**/*.rb"
-    - "Gemfile"
-    - "Guardfile"
-    - "config/environments/*.rb"
-    - "config/routes.rb"
-    - "config/routes/**/*.rb"
-    - "*.gemspec"
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'config/environments/*.rb'
+    - 'config/routes.rb'
+    - 'config/routes/**/*.rb'
+    - '*.gemspec'
 
 # 6 は強すぎるので緩める
 Metrics/CyclomaticComplexity:
@@ -138,12 +139,13 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 20
   Exclude:
-    - "db/migrate/*.rb"
+    - 'db/migrate/*.rb'
 
 # 分岐の数。ガード句を多用しているとデフォルト 7 だと厳しい
 Metrics/PerceivedComplexity:
   Max: 8
-
+  Exclude:
+    - 'bin/bundle'
 
 #################### Naming ################################
 
@@ -157,18 +159,17 @@ Naming/MethodParameterName:
 # has_ から始まるメソッドは許可する
 Naming/PredicateName:
   ForbiddenPrefixes:
-    - "is_"
-    - "have_"
+    - 'is_'
+    - 'have_'
   NamePrefix:
-    - "is_"
-    - "have_"
+    - 'is_'
+    - 'have_'
 
 #################### Security ##############################
 
 # 毎回 YAML.safe_load(yaml_str, [Date, Time]) するのは面倒で。。
 Security/YAMLLoad:
   Enabled: false
-
 
 #################### Style #################################
 
@@ -192,7 +193,7 @@ Style/AsciiComments:
 Style/BlockDelimiters:
   AutoCorrect: false
   Exclude:
-    - "spec/**/*_spec.rb"
+    - 'spec/**/*_spec.rb'
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
@@ -212,10 +213,10 @@ Style/ClassAndModuleChildren:
 #     collect -> map を維持しているのは文字数が圧倒的に少ないため。
 Style/CollectionMethods:
   PreferredMethods:
-    detect: "detect"
-    find: "detect"
-    inject: "inject"
-    reduce: "inject"
+    detect: 'detect'
+    find: 'detect'
+    inject: 'inject'
+    reduce: 'inject'
 
 # ドキュメントの無い public class を許可する
 Style/Documentation:
@@ -260,8 +261,8 @@ Style/GuardClause:
 # rake タスクの順序の hash は rocket を許可する
 Style/HashSyntax:
   Exclude:
-    - "**/*.rake"
-    - "Rakefile"
+    - '**/*.rake'
+    - 'Rakefile'
 
 # 平たくしてしまうと条件のグルーピングが脳内モデルとズレやすい
 Style/IfInsideElse:
@@ -284,10 +285,10 @@ Style/MethodCalledOnDoEndBlock:
 # spec/dummy は Rails Engine を開発するときに絶対に引っかかるので入れておく。
 Style/MixinUsage:
   Exclude:
-    - "bin/setup"
-    - "bin/update"
-    - "spec/dummy/bin/setup"
-    - "spec/dummy/bin/update"
+    - 'bin/setup'
+    - 'bin/update'
+    - 'spec/dummy/bin/setup'
+    - 'spec/dummy/bin/update'
 
 # 1_000_000 と区切り文字が 2 個以上必要になる場合のみ _ 区切りを必須にする
 # 10_000_00 は許可しない。(これは例えば 10000 ドルをセント単位にする時に便利だが
@@ -341,7 +342,7 @@ Style/SafeNavigation:
 # spec 内は見た目が綺麗になるので許可
 Style/Semicolon:
   Exclude:
-    - "spec/**/*_spec.rb"
+    - 'spec/**/*_spec.rb'
 
 # * 式展開したい場合に書き換えるのが面倒
 # * 文章ではダブルクォートよりもシングルクォートの方が頻出する
